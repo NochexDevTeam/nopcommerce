@@ -2,10 +2,10 @@
   "Group": "Payment methods",
   "FriendlyName": "Nochex",
   "SystemName": "Payments.Nochex",
-  "Version": "1.40",
-  "SupportedVersions": [ "4.20" ],
-  "Author": "Nochex",
+  "Version": "1.60",
+  "SupportedVersions": [ "4.30" ],
+  "Author": "nopCommerce team",
   "DisplayOrder": 1,
   "FileName": "Nop.Plugin.Payments.Nochex.dll",
-  "Description": "This plugin enables payments by credit / debit card"
+  "Description": "This plugin allows paying with Nochex"
 }

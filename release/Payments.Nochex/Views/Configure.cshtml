@@ -1,45 +1,43 @@
-﻿@model ConfigurationModel
+﻿@model Nop.Plugin.Payments.Nochex.Models.ConfigurationModel
+@inject Nop.Core.IWebHelper webHelper
 @{
     Layout = "_ConfigurePlugin";
 }
-@using Nop.Plugin.Payments.Nochex.Models
 
 @await Component.InvokeAsync("StoreScopeConfiguration")
+
+<!--script>
+	$(document).ready(function () {
+        $("#
+    Html.IdFor(mode
+    l => model.PassProductNamesAndTota
+    ls)").click(togglePassProductNamesAndTotals);
+	    togglePassProductNamesAndTotals();
+	});
+
+    function togglePassProductNamesAndTotals() {
+        warningValidation('
+    Url.Action("RoundingWarning", "PaymentPayPalStandard")', '
+    Html.NameFor(model => model.PassProductNamesAndTotals)',
+            { passProductNamesAndTotals: $('#
+    Html.IdFor(model => model.PassProductNamesAndTotals)').is(':checked') });
+    }
+</script-->
+
 <form asp-controller="PaymentNochex" asp-action="Configure" method="post">
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-body">
-                @(Html.LocalizedEditor<ConfigurationModel, ConfigurationModel.ConfigurationLocalizedModel>("plugin-settings-localized",
-                                                                        @<div>
-                                                                            <div class="form-group">
-                                                                                <div class="col-md-3">
-                                                                                    <nop-override-store-checkbox asp-for="DescriptionText_OverrideForStore" asp-input="@Model.Locales[item].DescriptionText" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
-                                                                                    <nop-label asp-for="@Model.Locales[item].DescriptionText" />
-                                                                                </div>
-                                                                                <div class="col-md-9">
-                                                                                    <nop-editor asp-for="@Model.Locales[item].DescriptionText" />
-                                                                                    <span asp-validation-for="@Model.Locales[item].DescriptionText"></span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <input type="hidden" asp-for="@Model.Locales[item].LanguageId" />
-                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                ,
-                                                                                                                                                                                                                                                                                                                                                                @<div>
-                                                                                                                                                                                                                                                                                                                                                                    <div class="form-group">
-                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-3">
-                                                                                                                                                                                                                                                                                                                                                                            <nop-override-store-checkbox asp-for="DescriptionText_OverrideForStore" asp-input="DescriptionText" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
-                                                                                                                                                                                                                                                                                                                                                                            <nop-label asp-for="DescriptionText" />
-                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-9">
-                                                                                                                                                                                                                                                                                                                                                                            <nop-editor asp-for="DescriptionText" />
-                                                                                                                                                                                                                                                                                                                                                                            <span asp-validation-for="DescriptionText"></span>
-                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                //localizable settings per store (overridden store settings) are not supported yet
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                true
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ))
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="TransactMode_OverrideForStore" asp-input="TransactMode" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="TransactMode" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="TransactMode" />
+                        <span asp-validation-for="TransactMode"></span>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-md-3">
                         <nop-override-store-checkbox asp-for="MerchantID_OverrideForStore" asp-input="MerchantID" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
@@ -53,37 +51,6 @@
 
                 <div class="form-group">
                     <div class="col-md-3">
-                        <nop-override-store-checkbox asp-for="TransactMode_OverrideForStore" asp-input="TransactMode" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
-                        <nop-label asp-for="TransactMode" />
-                    </div>
-                    <div class="col-md-9">
-                        <nop-editor asp-for="TransactMode" />
-                        <span asp-validation-for="TransactMode"></span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-3">
-                        <nop-override-store-checkbox asp-for="HideBillingDetails_OverrideForStore" asp-input="HideBillingDetails" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
-                        <nop-label asp-for="HideBillingDetails" />
-                    </div>
-                    <div class="col-md-9">
-                        <nop-editor asp-for="HideBillingDetails" />
-                        <span asp-validation-for="HideBillingDetails"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-3">
-                        <nop-override-store-checkbox asp-for="ProdInfoMode_OverrideForStore" asp-input="ProdInfoMode" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
-                        <nop-label asp-for="ProdInfoMode" />
-                    </div>
-                    <div class="col-md-9">
-                        <nop-editor asp-for="ProdInfoMode" />
-                        <span asp-validation-for="ProdInfoMode"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-3">
                         <nop-override-store-checkbox asp-for="AdditionalFee_OverrideForStore" asp-input="AdditionalFee" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
                         <nop-label asp-for="AdditionalFee" />
                     </div>
@@ -93,8 +60,18 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-override-store-checkbox asp-for="AdditionalFeePercentage_OverrideForStore" asp-input="AdditionalFeePercentage" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                        <nop-label asp-for="AdditionalFeePercentage" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="AdditionalFeePercentage" />
+                        <span asp-validation-for="AdditionalFeePercentage"></span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-md-9 col-md-offset-3">
-                        <input type="submit" name="save" class="btn bg-blue" value="@T("Admin.Common.Save")" />
+                        <input type="submit" name="save" class="btn bg-primary" value="@T("Admin.Common.Save")" />
                     </div>
                 </div>
             </div>
