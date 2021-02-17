@@ -9,19 +9,21 @@ namespace Nop.Plugin.Payments.Nochex.Infrastructure
         /// <summary>
         /// Register routes
         /// </summary>
-        /// <param name="routeBuilder">Route builder</param>
-        public void RegisterRoutes(IRouteBuilder routeBuilder)
+        /// <param name="endpointRouteBuilder">Route builder</param>
+        public void RegisterRoutes(IEndpointRouteBuilder endpointRouteBuilder)
         {
             /// APC
-            routeBuilder.MapRoute("Plugin.Payments.Nochex.APCHandler", "Plugins/PaymentNochex/APCHandler",
-                  new { controller = "PaymentNochex", action = "APCHandler" });
+            endpointRouteBuilder.MapControllerRoute("Plugin.Payments.Nochex.APCHandler", "Plugins/PaymentNochex/APCHandler",
+                new { controller = "PaymentNochex", action = "APCHandler" });
+
 
             /// CancelOrder
-            routeBuilder.MapRoute("Plugin.Payments.Nochex.CancelOrder", "Plugins/PaymentNochex/CancelOrder",
-                  new { controller = "PaymentNochex", action = "CancelOrder" });
+            endpointRouteBuilder.MapControllerRoute("Plugin.Payments.Nochex.CancelOrder", "Plugins/PaymentNochex/CancelOrder",
+                new { controller = "PaymentNochex", action = "CancelOrder" });
+
             /// CancelOrder
-            routeBuilder.MapRoute("Plugin.Payments.Nochex.SuccessOrder", "Plugins/PaymentNochex/SuccessOrder",
-                  new { controller = "PaymentNochex", action = "SuccessOrder" });
+            endpointRouteBuilder.MapControllerRoute("Plugin.Payments.Nochex.SuccessOrder", "Plugins/PaymentNochex/SuccessOrder",
+                new { controller = "PaymentNochex", action = "SuccessOrder" });
         }
 
         /// <summary>
